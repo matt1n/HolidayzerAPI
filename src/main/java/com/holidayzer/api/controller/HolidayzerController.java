@@ -40,13 +40,34 @@ public class HolidayzerController {
     }
     @GetMapping("/{date}")
     public String getDate(@PathVariable("date") String date) {
+        String[] dates = {"01-01-2024", "12-02-2024","13-02-2024","29-03-2024","21-04-2024","01-05-2024","30-05-2024", "07-09-2024","12-10-2024","02-11-2024","15-11-2024","20-11-2024","25-12-2024"};
+        String[] names = {"Confraternização Mundial",
+        "Carnaval",
+        "Carnaval",
+        "Sexta-feira Santa",
+        "Tiradentes",
+        "Dia do Trabalho",
+        "Corpus Christi",
+        "Independência do Brasil",
+        "Nossa Senhora Aparecida",
+        "Finados",
+        "Proclamação da República",
+        "Dia Nacional de Zumbi e da Consciência Negra",
+        "Natal"};
+        
+        List<Holidays> holidaysArray = new ArrayList<>();
+
+        for (int i = 0; i<dates.length; i++){
+            Holidays holiday = new Holidays(dates[i], names[i]);
+            holidaysArray.add(holiday);
+        };
+        
         for (Holidays i: holidaysArray){
-            if (i.getDate().equals(askDate)) {
-                System.out.println("Dia " + askDate + " é " + i.getName() + "! 🎉");
-                return;
-            } 
+            if (i.getDate().equals(date)) {
+                return ("Dia " + date + " é " + i.getName() + "! 🎉");
+            }
         } 
-        System.out.println("Dia " + askDate + " não é feriado 🥲");
+        return ("Dia " + date + " não é feriado 🥲");
         }
     }
 
